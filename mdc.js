@@ -3,7 +3,7 @@
  * @param {number} a 
  * @param {number} b 
  * @param {string} tipo 
- * @returns {SVGAnimatedNumberList}-1 se a entrada for inválida, caso contrário, o resultado do MDC.
+ * @returns {number} -1 se a entrada for inválida, caso contrário, o resultado do MDC.
  * 
  */
 

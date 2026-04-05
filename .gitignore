@@ -1,0 +1,29 @@
+# Dependencies
+/node_modules
+.pnpm-store
+
+# IDE and editor files
+.idea/
+.vscode/
+
+# Environment variables
+.env
+.env.development
+.env.production
+.env.test
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+report.[0-9]*.json.gz
+*.tgz
+.npmrc
+.yarnrc
+.yarn/install-state.cjs # https://yarnpkg.com
+
+# Build artifacts
+dist/
+build/
+*.tsbuildinfo

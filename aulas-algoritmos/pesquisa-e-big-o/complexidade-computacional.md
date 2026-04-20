@@ -11,7 +11,7 @@ A complexidade de um algoritmo pode ser entendida como *o cálculo de custo comp
 
 ### Complexidade Temporal x Complexidade Espacial
 
-A Complexidade Temporal pode ser vista como o número de operações realizadas pelo algoritmo, enquanto a complexidade espacial, diz respeito ao espaço (*space*) de memória utilizado pelo algoritmo. A Complexidade Espacial pode ser vista como o uso de “células de memória” (como gavetas em um armário),por parte de um algoritmo.
+A Complexidade Temporal pode ser vista como o número de operações realizadas pelo algoritmo, enquanto a complexidade espacial diz respeito ao espaço (*space*) de memória utilizado pelo algoritmo. A Complexidade Espacial pode ser vista como o uso de “células de memória” (como gavetas em um armário) por parte de um algoritmo.
 
 ## Passos básicos para cálculo de Complexidade Temporal (*Big O*)
 

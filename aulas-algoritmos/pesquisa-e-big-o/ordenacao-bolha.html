@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualização Didática: Bubble Sort</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Seção Didática (Artigo) */
+        .artigo-didatico {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin-bottom: 20px;
+            border-left: 5px solid #0056b3;
+        }
+
+        .artigo-didatico h1 { margin-top: 0; color: #0056b3; }
+        .artigo-didatico h3 { color: #495057; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .codigo-exemplo {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #d63384;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Controles da Animação */
+        .painel-controles {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { background-color: #004494; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        .btn-play { background-color: #28a745; }
+        .btn-play:hover { background-color: #1e7e34; }
+        .btn-pause { background-color: #dc3545; }
+        .btn-pause:hover { background-color: #c82333; }
+
+        /* Grid de Visualização */
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .celula {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e9ecef;
+            color: #333;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .comparando {
+            background-color: #ffc107 !important;
+            color: black;
+            transform: scale(1.15);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.5);
+        }
+
+        .trocando {
+            background-color: #dc3545 !important;
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .ordenado {
+            background-color: #20c997 !important;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <article class="artigo-didatico">
+        <h1>Ordenação por Método da Bolha (Bubble Sort)</h1>
+        <p>O <strong>Bubble Sort</strong> é um dos algoritmos de ordenação mais simples e intuitivos. Ele recebe esse nome porque a sua mecânica lembra bolhas de ar subindo para a superfície da água: a cada passagem pela lista, os maiores elementos "flutuam" para as últimas posições.</p>
+        
+        <p>O algoritmo funciona comparando elementos adjacentes (vizinhos) dois a dois. Se o elemento da esquerda for maior que o da direita, eles trocam de posição. Esse processo se repete até que nenhuma troca seja necessária, garantindo que o vetor está ordenado.</p>
+
+        <h3>Exemplo passo a passo com 5 elementos</h3>
+        <p>Imagine que temos o seguinte vetor desordenado:</p>
+        <span class="codigo-exemplo">Vetor Inicial: [5, 3, 8, 4, 2]</span>
+
+        <p><strong>Primeira Rodada (Flutuando o maior número):</strong></p>
+        <ul>
+            <li>Comparamos <strong>5</strong> e <strong>3</strong>. Como 5 > 3, trocamos: <br><code>[3, 5, 8, 4, 2]</code></li>
+            <li>Comparamos <strong>5</strong> e <strong>8</strong>. Como 5 < 8, não trocamos: <br><code>[3, 5, 8, 4, 2]</code></li>
+            <li>Comparamos <strong>8</strong> e <strong>4</strong>. Como 8 > 4, trocamos: <br><code>[3, 5, 4, 8, 2]</code></li>
+            <li>Comparamos <strong>8</strong> e <strong>2</strong>. Como 8 > 2, trocamos: <br><code>[3, 5, 4, 2, 8]</code></li>
+        </ul>
+        <p><em>Fim da primeira rodada. O maior número (8) já "flutuou" para a sua posição final à direita.</em></p>
+
+        <p><strong>Segunda Rodada (Ignorando o último elemento):</strong></p>
+        <ul>
+            <li>Comparamos <strong>3</strong> e <strong>5</strong>. Não trocamos: <br><code>[3, 5, 4, 2, 8]</code></li>
+            <li>Comparamos <strong>5</strong> e <strong>4</strong>. Trocamos: <br><code>[3, 4, 5, 2, 8]</code></li>
+            <li>Comparamos <strong>5</strong> e <strong>2</strong>. Trocamos: <br><code>[3, 4, 2, 5, 8]</code></li>
+        </ul>
+        <p><em>Fim da segunda rodada. O segundo maior número (5) agora está na posição correta.</em></p>
+
+        <p>O algoritmo continua esse processo até que, em uma rodada completa, nenhuma troca seja feita. Agora que entendemos a mecânica em um conjunto pequeno, <strong>teste o comportamento do algoritmo na prática com uma lista de 100 elementos abaixo!</strong></p>
+    </article>
+
+    <div class="painel-controles">
+        <button id="btn-gerar">Embaralhar Novo Vetor</button>
+        <button id="btn-passo">Passo a Passo (▶|)</button>
+        <button id="btn-play" class="btn-play">Reproduzir (▶)</button>
+        
+        <label style="display: flex; align-items: center; gap: 10px; font-weight: bold;">
+            Velocidade:
+            <input type="range" id="input-velocidade" min="10" max="500" value="100" dir="rtl">
+        </label>
+    </div>
+
+    <div id="grid-container"></div>
+
+    <script>
+        const TAMANHO_VETOR = 100;
+        let vetor = [];
+        let iteradorOrdenacao = null;
+        let intervaloPlay = null;
+
+        const container = document.getElementById('grid-container');
+        const btnGerar = document.getElementById('btn-gerar');
+        const btnPasso = document.getElementById('btn-passo');
+        const btnPlay = document.getElementById('btn-play');
+        const inputVelocidade = document.getElementById('input-velocidade');
+
+        function gerarVetorAleatorio() {
+            vetor = [];
+            for (let i = 0; i < TAMANHO_VETOR; i++) {
+                vetor.push(Math.floor(Math.random() * 999) + 1);
+            }
+            renderizarGridBase();
+            iteradorOrdenacao = algoritmoBubbleSort();
+        }
+
+        function renderizarGridBase() {
+            container.innerHTML = '';
+            vetor.forEach((numero, indice) => {
+                const div = document.createElement('div');
+                div.className = 'celula';
+                div.id = `celula-${indice}`;
+                div.innerText = numero;
+                
+                const intensidade = Math.floor((numero / 1000) * 100);
+                div.style.backgroundColor = `hsl(210, 20%, ${95 - intensidade}%)`;
+                
+                container.appendChild(div);
+            });
+        }
+
+        function* algoritmoBubbleSort() {
+            let n = vetor.length;
+            let trocou;
+            
+            for (let i = 0; i < n - 1; i++) {
+                trocou = false;
+                for (let j = 0; j < n - i - 1; j++) {
+                    yield { tipo: 'comparando', indices: [j, j + 1] };
+                    
+                    if (vetor[j] > vetor[j + 1]) {
+                        let temp = vetor[j];
+                        vetor[j] = vetor[j + 1];
+                        vetor[j + 1] = temp;
+                        trocou = true;
+                        
+                        yield { tipo: 'trocando', indices: [j, j + 1] };
+                    }
+                }
+                yield { tipo: 'ordenado', indices: [n - i - 1] };
+                if (!trocou) break; 
+            }
+            
+            for (let k = 0; k < n; k++) {
+                yield { tipo: 'ordenado', indices: [k] };
+            }
+        }
+
+        function processarProximoPasso() {
+            if (!iteradorOrdenacao) return false;
+
+            const passo = iteradorOrdenacao.next();
+            
+            if (passo.done) {
+                pararReproducao();
+                btnPasso.disabled = true;
+                btnPlay.disabled = true;
+                return false;
+            }
+
+            const instrucao = passo.value;
+            
+            document.querySelectorAll('.celula').forEach(c => {
+                c.classList.remove('comparando', 'trocando');
+            });
+
+            if (instrucao.tipo === 'comparando' || instrucao.tipo === 'trocando') {
+                const [idx1, idx2] = instrucao.indices;
+                const cel1 = document.getElementById(`celula-${idx1}`);
+                const cel2 = document.getElementById(`celula-${idx2}`);
+                
+                cel1.classList.add(instrucao.tipo);
+                cel2.classList.add(instrucao.tipo);
+
+                if (instrucao.tipo === 'trocando') {
+                    cel1.innerText = vetor[idx1];
+                    cel2.innerText = vetor[idx2];
+                }
+            } else if (instrucao.tipo === 'ordenado') {
+                instrucao.indices.forEach(idx => {
+                    document.getElementById(`celula-${idx}`).classList.add('ordenado');
+                });
+            }
+
+            return true;
+        }
+
+        function iniciarReproducao() {
+            if (intervaloPlay) return;
+            btnPlay.innerText = "Pausar (||)";
+            btnPlay.classList.replace('btn-play', 'btn-pause');
+            btnPasso.disabled = true;
+
+            const executar = () => {
+                const continuou = processarProximoPasso();
+                if (continuou && intervaloPlay) {
+                    intervaloPlay = setTimeout(executar, inputVelocidade.value);
+                }
+            };
+            
+            intervaloPlay = setTimeout(executar, inputVelocidade.value);
+        }
+
+        function pararReproducao() {
+            clearTimeout(intervaloPlay);
+            intervaloPlay = null;
+            btnPlay.innerText = "Reproduzir (▶)";
+            btnPlay.classList.replace('btn-pause', 'btn-play');
+            btnPasso.disabled = false;
+        }
+
+        btnGerar.addEventListener('click', () => {
+            pararReproducao();
+            btnPasso.disabled = false;
+            btnPlay.disabled = false;
+            gerarVetorAleatorio();
+        });
+
+        btnPasso.addEventListener('click', processarProximoPasso);
+
+        btnPlay.addEventListener('click', () => {
+            if (intervaloPlay) {
+                pararReproducao();
+            } else {
+                iniciarReproducao();
+            }
+        });
+
+        gerarVetorAleatorio();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa Linear</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Seção Didática (Artigo) */
+        .artigo-didatico {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin-bottom: 20px;
+            border-left: 5px solid #007bff; /* Azul para diferenciar da Binária */
+        }
+
+        .artigo-didatico h1 { margin-top: 0; color: #0056b3; }
+        .artigo-didatico h3 { color: #495057; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        
+        .codigo-exemplo {
+            background-color: #f1f3f5;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #d63384;
+            display: block;
+            margin: 10px 0;
+        }
+
+        /* Controles */
+        .painel-controles {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { background-color: #004494; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        
+        #btn-gerar { background-color: #6c757d; }
+        #btn-gerar:hover { background-color: #5a6268; }
+
+        /* LogView de Status */
+        .painel-status {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 800px;
+            text-align: left;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box;
+            height: 280px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+
+        .log-linha {
+            padding: 6px 0;
+            border-bottom: 1px solid #495057;
+        }
+        
+        .log-linha:last-child {
+            border-bottom: none;
+            color: #20c997;
+            font-weight: bold;
+        }
+
+        /* Grid de Visualização (10x10) */
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .celula {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Classes dinâmicas */
+        .descartada {
+            background-color: #e9ecef !important;
+            color: #adb5bd !important;
+            border-color: #f1f3f5;
+            opacity: 0.4;
+            transform: scale(0.95);
+        }
+
+        .analisando {
+            background-color: #ffc107 !important;
+            color: black !important;
+            border-color: #e0a800;
+            transform: scale(1.15);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.5);
+        }
+
+        .encontrado {
+            background-color: #20c997 !important;
+            color: white !important;
+            border-color: #17a2b8;
+            transform: scale(1.2);
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.5);
+        }
+
+        .copyleft {
+            display:inline-block;
+            transform: rotate(180deg);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.85em;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <article class="artigo-didatico">
+        <h1>Pesquisa Linear (Sequencial)</h1>
+        <p>A <strong>Pesquisa Linear</strong> é o algoritmo mais simples de busca. Ele verifica cada elemento de uma lista, um por vez, do início ao fim, até encontrar o valor procurado.</p>
+        
+        <p>Ao contrário da Pesquisa Binária, ela <strong>não exige que a lista esteja ordenada</strong>. Isso é uma vantagem na hora de inserir novos dados, mas tem um custo: a lentidão. No pior dos casos, se o elemento estiver na última posição (ou não existir na lista), o computador será obrigado a verificar todos os itens (complexidade <em>O(n)</em>).</p>
+
+        <h3>Exemplo passo a passo com 5 elementos</h3>
+        <p>Imagine que temos o vetor desordenado abaixo e queremos encontrar o número <strong>42</strong>:</p>
+        <span class="codigo-exemplo">Vetor: [15, 8, 42, 99, 4]  |  Alvo: 42</span>
+
+        <ul>
+            <li><strong>Passo 1:</strong> Analisa a posição 0. "15 é igual a 42?". Não. Descarta.</li>
+            <li><strong>Passo 2:</strong> Analisa a posição 1. "8 é igual a 42?". Não. Descarta.</li>
+            <li><strong>Passo 3:</strong> Analisa a posição 2. "42 é igual a 42?". <strong>Sim!</strong></li>
+        </ul>
+
+        <p><em>Teste no grid interativo abaixo com uma lista de 20 números aleatórios:</em></p>
+    </article>
+
+    <div id="grid-container"></div>
+
+    <div class="painel-controles">
+        <button id="btn-gerar">Novo Vetor e Novo Alvo</button>
+        <button id="btn-anterior">Passo Anterior (◀|)</button>
+        <button id="btn-passo">Próximo Passo (▶|)</button>
+    </div>
+    <div class="painel-status" id="status-texto"></div>
+
+    <footer>
+        <p><span class="copyleft">&copy;</span> 2026 Visualização Didática. Desenvolvido por Wellington Sarmento em cooperação com a IA Google Gemini. Código fonte: <a href="https://github.com/wwagner33/prog2-2026-1-codigos" target="_blank">link.</a></p>
+    </footer>
+
+    <script>
+        const TAMANHO_VETOR = 20;
+        let vetor = [];
+        let alvoAtual = 0;
+        
+        let historicoPassos = [];
+        let passoAtual = 0;
+
+        const container = document.getElementById('grid-container');
+        const btnGerar = document.getElementById('btn-gerar');
+        const btnPasso = document.getElementById('btn-passo');
+        const btnAnterior = document.getElementById('btn-anterior');
+        const statusTexto = document.getElementById('status-texto');
+
+        // 1. Gera um vetor totalmente DESORDENADO
+        function gerarVetor() {
+            vetor = [];
+            for (let i = 0; i < TAMANHO_VETOR; i++) {
+                // Números aleatórios de 1 a 99
+                vetor.push(Math.floor(Math.random() * 99) + 1);
+            }
+            
+            // Define o alvo (com 80% de chance de estar no vetor para facilitar a visualização)
+            if (Math.random() > 0.2) {
+                const indiceAlvoAleatorio = Math.floor(Math.random() * TAMANHO_VETOR);
+                alvoAtual = vetor[indiceAlvoAleatorio];
+            } else {
+                alvoAtual = 100; // Alvo que não existe no vetor
+            }
+            
+            renderizarGridBase();
+            calcularTodosOsPassos();
+            
+            passoAtual = 0;
+            atualizarVisualizacao();
+        }
+
+        // 2. Renderiza o grid HTML base
+        function renderizarGridBase() {
+            container.innerHTML = '';
+            vetor.forEach((numero, indice) => {
+                const div = document.createElement('div');
+                div.className = 'celula';
+                div.id = `celula-${indice}`;
+                div.innerText = numero;
+                container.appendChild(div);
+            });
+        }
+
+        // 3. Pré-calcula os estados da Busca Linear
+        function calcularTodosOsPassos() {
+            historicoPassos = [];
+            
+            historicoPassos.push({
+                indiceAtual: -1, estado: 'inicio',
+                msg: `Vetor gerado. Alvo: [${alvoAtual}]. Use o botão [PRÓXIMO PASSO] para varrer a lista.`
+            });
+
+            // Varre o vetor sequencialmente
+            for (let i = 0; i < vetor.length; i++) {
+                historicoPassos.push({ 
+                    indiceAtual: i, estado: 'analisando', 
+                    msg: `Posição [${i}]: Valor é ${vetor[i]}. É igual a ${alvoAtual}?` 
+                });
+                
+                if (vetor[i] === alvoAtual) {
+                    historicoPassos.push({ 
+                        indiceAtual: i, estado: 'encontrado', 
+                        msg: `Sucesso! O valor ${alvoAtual} foi encontrado na posição [${i}].` 
+                    });
+                    return; // Para a busca assim que encontra
+                } else {
+                    historicoPassos.push({ 
+                        indiceAtual: i, estado: 'descartando', 
+                        msg: `O valor ${vetor[i]} não é o alvo. Avançando...` 
+                    });
+                }
+            }
+            
+            // Se o loop terminar sem retornar, o alvo não existe
+            historicoPassos.push({ 
+                indiceAtual: vetor.length, estado: 'nao_encontrado', 
+                msg: `Pesquisa encerrada. Todo o vetor foi verificado e o valor ${alvoAtual} não foi encontrado.` 
+            });
+        }
+
+        // 4. Lógica de Atualização Visual
+        function atualizarVisualizacao() {
+            const inst = historicoPassos[passoAtual];
+            
+            statusTexto.innerHTML = '';
+            for(let i = 0; i <= passoAtual; i++) {
+                const divLog = document.createElement('div');
+                divLog.className = 'log-linha';
+                divLog.innerHTML = `> Passo ${i}: ${historicoPassos[i].msg}`;
+                statusTexto.appendChild(divLog);
+            }
+            
+            statusTexto.scrollTop = statusTexto.scrollHeight;
+            
+            for (let i = 0; i < TAMANHO_VETOR; i++) {
+                const celula = document.getElementById(`celula-${i}`);
+                celula.classList.remove('analisando', 'encontrado', 'descartada');
+
+                if (inst.estado !== 'inicio') {
+                    if (i < inst.indiceAtual) {
+                        // Tudo à esquerda do índice atual já foi descartado
+                        celula.classList.add('descartada');
+                    } else if (i === inst.indiceAtual) {
+                        // O elemento atual sendo focado
+                        if (inst.estado === 'encontrado') {
+                            celula.classList.add('encontrado');
+                        } else if (inst.estado === 'analisando') {
+                            celula.classList.add('analisando');
+                        } else if (inst.estado === 'descartando') {
+                            celula.classList.add('descartada');
+                        }
+                    }
+                }
+            }
+
+            btnAnterior.disabled = (passoAtual === 0);
+            btnPasso.disabled = (passoAtual === historicoPassos.length - 1);
+        }
+
+        btnGerar.addEventListener('click', gerarVetor);
+
+        btnPasso.addEventListener('click', () => {
+            if (passoAtual < historicoPassos.length - 1) {
+                passoAtual++;
+                atualizarVisualizacao();
+            }
+        });
+
+        btnAnterior.addEventListener('click', () => {
+            if (passoAtual > 0) {
+                passoAtual--;
+                atualizarVisualizacao();
+            }
+        });
+
+        gerarVetor();
+
+    </script>
+</body>
+</html>

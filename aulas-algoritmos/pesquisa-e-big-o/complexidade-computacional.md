@@ -54,9 +54,9 @@ Por quê? Porque quando $n$ for 1 bilhão, a diferença entre 1 bilhão ou 2 bil
 
 Os algoritmos costumam ter várias partes. Imagine uma função que faz o seguinte:
 
-> 1. Imprime o primeiro item da lista: Trabalho $1$  
-> 2. Varre a lista inteira usando um for: Trabalho $n$  
-> 3. Roda dois laços aninhados para comparar todos contra todos: Trabalho $n^2$
+> 1. Imprime o primeiro item da lista: Complexidade $1$  
+> 2. Varre a lista inteira usando um for: Complexidade $n$  
+> 3. Roda dois laços aninhados para comparar todos contra todos: Complexidade $n^2$
 
 A equação total de operações seria: $n^2 + n + 1$.
 

@@ -33,9 +33,9 @@ O coração da análise de complexidade está em contar quantas vezes o algoritm
   * Resultado: $O(1)$  
 * **Um laço simples (*for* ou *while*)**: se o código varre a lista inteira uma vez:
   * Resultado: $O(n)$
-* **Laços aninhados (um for dentro de outro *for*)**:Pesquisa Para cada item de $n$, ele roda $n$ vezes de novo. Muito comum em ordenação ou varredura de matrizes 2D:
-  * Resultado: $n \times n =$ $O(n^2)$  
-* **Corte pela metade (*while* dividindo)**: pesquisa Se o algoritmo divide o problema pela metade a cada passo (como buscar um nome em uma lista telefônica, abrindo no meio e ignorando a outra metade):
+* **Laços aninhados (um for dentro de outro *for*)**: Para cada item de $m$, ele roda $n$ vezes. Muito comum em ordenação ou varredura de matrizes 2D:
+  * Resultado: $n \times m$; se $n = m$, temos $O(n^2)$  
+* **Corte pela metade (*while* dividindo)**: Se o algoritmo divide o problema pela metade a cada passo (como buscar um nome em uma lista telefônica, abrindo no meio e ignorando a outra metade):
   * Resultado: $O(\log n)$
 
 ### Passo 3: Ignore as Constantes (A Regra do "Desapego")

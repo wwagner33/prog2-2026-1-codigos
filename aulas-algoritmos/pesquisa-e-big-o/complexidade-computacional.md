@@ -70,7 +70,7 @@ Para fixar de vez, basta lembrar da hierarquia de complexidade. Todo algoritmo v
 | :---- | :---- | :---- | :---: |
 | $O(1)$ | Constante | Não tem laços. Só lê *arrays* por índice ou faz matemática direta. | Excelente |
 | $O(\\log n)$ | Logarítmica | O laço divide o $n$ por 2 a cada ciclo (ex: Busca Binária). | Ótimo |
-| $O(n)$ | Linear | Tem um único laço *for* ou *while* que vai até $n$. | Bom |
+| $O(n)$ | Linear | Tem laço(s) simples *for* ou *while* que vai até $n$. | Bom |
 | $O(n \log n)$ | Log-Linear | Algoritmos eficientes de ordenação de dados (Merge Sort, Quick Sort). | Razoável |
 | $O(n^2)$ | Quadrática | Dois laços aninhados (um dentro do outro). | Perigoso para $n$ grande |
 | $O(2^n)$ | Exponencial | Recursões ingênuas com duas ou mais chamadas (Nosso Fibonacci puro\!). | Ruim / Trava a máquina |

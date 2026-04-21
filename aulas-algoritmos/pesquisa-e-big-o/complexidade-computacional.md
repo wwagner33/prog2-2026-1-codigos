@@ -82,8 +82,9 @@ Para fixar de vez, basta lembrar da hierarquia de complexidade. Todo algoritmo v
 
 > ### Exponenciação e Logaritmo
 > 
-> **Exponenciação (Multiplicar)**: pesquisa Se você começa com 1 e multiplica por 2 várias vezes, você está calculando uma potência. "Quantas vezes eu multiplico o 2 para chegar a 1024?" A resposta é 10 (pois $2^{10} = 1024$);
-> **Logaritmo (Dividir)**: pesquisa Se você começa com 1024 e divide por 2 várias vezes, você está calculando o logaritmo na **base 2**. "Quantas vezes eu preciso dividir 1024 pela metade até sobrar apenas 1?" A resposta é 10\. Matematicamente, escrevemos isso como $\log_2 (1024) = 10$.
+> **Exponenciação (Multiplicar)**: Se você começa com 1 e multiplica por 2 várias vezes, você está calculando uma potência. "Quantas vezes eu multiplico o 2 para chegar a 1024?" A resposta é 10 (pois $2^{10} = 1024$);
+> 
+> **Logaritmo (Dividir)**: Se você começa com 1024 e divide por 2 várias vezes, você está calculando o logaritmo na **base 2**. "Quantas vezes eu preciso dividir 1024 pela metade até sobrar apenas 1?" A resposta é 10\. Matematicamente, escrevemos isso como $\log_2 (1024) = 10$.
 >
 
 ### A Prova Matemática no Laço
@@ -98,7 +99,7 @@ Imagine que você tem um laço *while* que pega um número $N$ e o divide por $2
 > * ...
 > * Passo $k$: o tamanho cai para $\frac{N}{2^k}$
 
-Nós sabemos que o laço para quando o tamanho da divisão chega a Pesquisa1Pesquisa. Então, podemos montar a seguinte equação para descobrir quem é o $k$ (o número total de passos):
+Nós sabemos que o laço para quando o tamanho da divisão chega a $1$. Então, podemos montar a seguinte equação para descobrir quem é o $k$ (o número total de passos):
 
 $$\frac{N}{2^k} = 1$$  
 Agora, resolvemos a equação:

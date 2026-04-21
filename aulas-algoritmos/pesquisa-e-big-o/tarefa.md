@@ -1,4 +1,4 @@
-# Exercícios
+# Tarefa
 
 1. **Leia o texto a seguir e implemente uma função que permita calcular o n-ésimo número de uma série de Fibonacci, baseado na fórmula de Binet.**
 

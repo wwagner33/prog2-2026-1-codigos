@@ -23,7 +23,7 @@ A primeira coisa a fazer é descobrir o que faz o seu algoritmo trabalhar mais. 
 
 * Se você tem uma função que varre uma lista de usuários, $n$ é o tamanho dessa lista;
 * No nosso caso de Fibonacci, $n$ era a posição do número desejado;
-* Se a função apenas soma a \+ b, a entrada não importa para o tempo, então chamamos o trabalho de constante: $O(1)$.
+* Se a função apenas soma a \+ b, a entrada não importa para o tempo, então temos uma complexidade constante: $O(1)$.
 
 ### Passo 2:  Conte os Laços (*Loops*)
 

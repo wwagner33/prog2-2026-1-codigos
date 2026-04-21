@@ -119,9 +119,10 @@ Se você tem um dicionário de 1000 páginas e quer achar uma palavra:
 1. Uma Pesquisa Linear $O(n)$ faria você virar uma página de cada vez. Pior cenário: 1000 passos;
    
 2. Uma busca Logarítmica $O(\log n)$ faz você abrir no meio:
-> 2.1 A palavra está na primeira ou segunda metade? Você descarta 500 páginas de uma vez;
-> 2.2 Abre no meio de novo;
-> 2.3 **Descarta 250**;
-> 2.4 Depois *125, 62, 31, 15, 7, 3, 1*, dependendo onde esteja a palavra desejada.
-> 
+
+> * A palavra está na primeira ou segunda metade? Você descarta 500 páginas de uma vez;
+> * Abre no meio de novo;
+> * **Descarta 250**;
+> * Depois *125, 62, 31, 15, 7, 3, 1*, dependendo onde esteja a palavra desejada.
+
 Em no máximo **10 passos**, você pode achar qualquer palavra em um livro de 1000 páginas. Se o livro tivesse um milhão de páginas, você não precisaria de um milhão de passos, precisaria de apenas **20 passos** ($2^{20} \approx 1.000.000$).

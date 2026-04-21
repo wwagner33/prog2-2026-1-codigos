@@ -44,7 +44,7 @@ No Big O, nós estamos pensando no infinito. Valores fixos não importam.
 
 Imagine um algoritmo que tem dois laços *for* separados, um depois do outro. Ele varre a lista $n$ e depois varre $n$ de novo.
 
-Matematicamente, o trabalho é $n + n = 2n$.
+Matematicamente, a complexidade é $n + n = 2n$.
 
 No Big O, você joga a constante (o número 2\) fora. A complexidade não é $O(2n)$, ela cai para $O(n)$.
 
@@ -54,9 +54,9 @@ Por quê? Porque quando $n$ for 1 bilhão, a diferença entre 1 bilhão ou 2 bil
 
 Os algoritmos costumam ter várias partes. Imagine uma função que faz o seguinte:
 
-> 1. Imprime o primeiro item da lista: Complexidade $1$  
-> 2. Varre a lista inteira usando um for: Complexidade $n$  
-> 3. Roda dois laços aninhados para comparar todos contra todos: Complexidade $n^2$
+> 1. Imprime o primeiro item da lista: Complexidade $O(1)$  
+> 2. Varre a lista inteira usando um for: Complexidade $O(n)$  
+> 3. Roda dois laços aninhados para comparar todos contra todos: Complexidade $O(n^2)$
 
 A equação total de operações seria: $n^2 + n + 1$.
 

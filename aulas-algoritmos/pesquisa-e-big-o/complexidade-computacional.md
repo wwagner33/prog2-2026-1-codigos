@@ -15,7 +15,7 @@ A Complexidade Temporal pode ser vista como o número de operações realizadas 
 
 ## Passos básicos para cálculo de Complexidade Temporal (*Big O*)
 
-Não existe uma "forma" geral e exata para o cálculo de complexidade temporal, porém, podemos listar alguns passos que podem ser utilizados para este fim, baseado na experiência que tivemos com algoritmos.
+Não existe uma "forma" geral e exata para o cálculo de complexidade temporal, porém, podemos listar alguns passos que podem ser utilizados para este fim.
 
 ### Passo 1: Identifique o "n" (Tamanho da Entrada)
 

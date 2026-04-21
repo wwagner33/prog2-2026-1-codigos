@@ -2,7 +2,6 @@
 
 *Por Wellington Sarmento*
 
-
 ## O que é a análise de complexidade de um algoritmo?
 
 Podemos solucionar um problema algoritmo de diferentes formas, porém, cada forma pode demandar um maior tempo de processamento ou uso de memória por parte do computador. Como estes recursos são limitados, precisamos sempre buscar por soluções que possam ter um **gasto** menor dos recursos disponíveis pelo computador.
@@ -62,7 +61,7 @@ A equação total de operações seria: $n^2 + n + 1$.
 
 No Big $O$, você elimina tudo que não for o termo de maior crescimento. O $n$ e o $1$ são tão insignificantes perto do peso do $n^2$ (quando a lista for gigantesca) que nós os ignoramos. A complexidade final dessa função é apenas $O(n^2)$.
 
-### Resumo Visual das Categorias de Complexidade (Temporal)
+### Resumo Visual das Categorias de Complexidade Temporal
 
 Para fixar de vez, basta lembrar da hierarquia de complexidade. Todo algoritmo vai se encaixar em uma dessas faixas de velocidade.
 

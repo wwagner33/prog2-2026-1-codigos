@@ -54,6 +54,17 @@ O número de chamadas recursivas cresce exponencialmente, o que torna esse algor
 */
 
 
+/**
+ * fibonacciMemo() resolve o problema da "amnésia" da recursão simples através de uma técnica chamada Memoization.
+ * * Diferente da versão 'ruim', esta função utiliza um objeto (cache) para armazenar os resultados de cálculos 
+ * já realizados. O fluxo funciona assim:
+ * * 1. O computador recebe o pedido para calcular f(n).
+ * 2. Antes de calcular, ele consulta o objeto 'memo': "Eu já calculei f(n) antes?".
+ * 3. Se o resultado estiver lá, ele o retorna instantaneamente sem gastar processamento.
+ * 4. Se não estiver, ele calcula UMA VEZ, guarda no 'memo' e segue adiante.
+ * * Isso transforma a complexidade de Exponencial (lenta) em Linear (extremamente rápida), 
+ * permitindo calcular valores como f(100) em milissegundos.
+ */
 
 /**
  * Calcula o n-ésimo termo da Série de Fibonacci de forma recursiva.
